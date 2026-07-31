@@ -1,4 +1,5 @@
 # This doc will record the TCP interaction in linux OS.
+# Receive incoming segments
 <img width="364" height="249" alt="image" src="https://github.com/user-attachments/assets/167ea61d-f828-435d-9802-6ff995a67b25" />
 
 ## `tcp_v4_rcv()`
@@ -80,3 +81,16 @@ check the ack
 Process data then check state again
 
 Related RFC: RFC9293
+
+## `tcp_rcv_established()`
+### Role: Fast receive path for TCP_ESTABLISHED connections.
+### Responsibility  
+1. Fast-path validation
+2. Process ACK
+3. Queue payload
+4. Handle urgent/out-of-order data
+
+Related RFC: RFC9293
+
+# Process incoming ack segments
+## `tcp_rcv_state_process(tcp_ack)`
