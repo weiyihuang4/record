@@ -92,5 +92,14 @@ Related RFC: RFC9293
 
 Related RFC: RFC9293
 
-# Process incoming ack segments
-## `tcp_rcv_state_process(tcp_ack)`
+# Process the acknowledgment information carried by incoming TCP segments.
+## `tcp_ack()`
+### Role: process the ack in segments
+### Responsibility
+1. Validate ACK information.
+2. Advance snd_una and remove acknowledged packets from the retransmission queue.
+3. Update RTT estimation.
+4. Detect duplicate ACKs.
+5. Trigger congestion-control and fast retransmission when required.
+
+Related RFC: 1-3 RFC5681  4-5 RFC9293
