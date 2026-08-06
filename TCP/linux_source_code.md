@@ -96,10 +96,19 @@ Related RFC: RFC9293
 ## `tcp_ack()`
 ### Role: process the ack in segments
 ### Responsibility
-1. Validate ACK information.
-2. Advance snd_una and remove acknowledged packets from the retransmission queue.
-3. Update RTT estimation.
-4. Detect duplicate ACKs.
-5. Trigger congestion-control and fast retransmission when required.
+1. Validate ACK information by adding flag.
+2. Advance snd_una and remove acknowledged packets from the retransmission queue -> tcp_clean_rtx_queue() Update RTT estimation ->  tcp_ack_update_rtt()
+3. Detect duplicate ACKs -> tcp_process_tlp_ack()
+4. Trigger congestion-control and fast retransmission when required -> tcp_cong_control() && tcp_fastretrans_alert()
 
-Related RFC: 1-3 RFC5681  4-5 RFC9293
+Related RFC: 
+RFC9293
+- ACK validation
+- snd_una update
+- Retransmission queue
+- RTT measurement
+
+RFC5681
+- Duplicate ACK
+- Fast Retransmit
+- Congestion Control
