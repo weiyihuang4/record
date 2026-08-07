@@ -94,7 +94,7 @@ Related RFC: RFC9293
 
 # Process the acknowledgment information carried by incoming TCP segments.
 ## `tcp_ack()`
-### Role: process the ack in segments
+### Role: Process the ack in segments
 ### Responsibility
 1. Validate ACK information by adding flag.
 2. Advance snd_una and remove acknowledged packets from the retransmission queue -> tcp_clean_rtx_queue() Update RTT estimation ->  tcp_ack_update_rtt()
@@ -112,3 +112,25 @@ RFC5681
 - Duplicate ACK
 - Fast Retransmit
 - Congestion Control
+
+## `tcp_fastretrans_alert()`
+tcp_ack()  
+      │  
+      ▼  
+tcp_clean_rtx_queue()  
+      │  
+      ▼  
+tcp_fastretrans_alert()   
+### Role: Core loss recovery and fast retransmission handler.
+### Responsibility
+1. Detect packet loss using Duplicate ACKs and SACK information.
+2. Enter or leave Fast Recovery according to the congestion-control state.
+3. Mark lost packets and trigger retransmission when necessary.
+4. Update congestion window (cwnd) and ssthresh according to the congestion-control algorithm.
+5. Coordinate with congestion-control modules (Reno/CUBIC/BBR).
+
+Related RFC:
+RFC5681
+- Fast Retransmit
+- Fast Recovery
+- Congestion Window Reduction
