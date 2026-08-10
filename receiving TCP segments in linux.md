@@ -1,4 +1,4 @@
-# This doc will record the TCP interaction in linux OS.
+# This doc will record the the process of receiving TCP segments in linux OS.
 # Receive incoming segments
 <img width="364" height="249" alt="image" src="https://github.com/user-attachments/assets/167ea61d-f828-435d-9802-6ff995a67b25" />
 
