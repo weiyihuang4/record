@@ -2,6 +2,7 @@
 ## tcp_sendmsg() in net/ipv4/tcp.c
 
 ### Role
+
 Entry point for sending application data through TCP.
 
 ### Responsibility
@@ -14,6 +15,7 @@ Entry point for sending application data through TCP.
 ## tcp_sendmsg_locked()
 
 ### Role
+
 Copy application data into the TCP send buffer.
 
 ### Responsibility
@@ -30,3 +32,33 @@ RFC9293
 ---
 
 ## tcp_push()
+
+### Role
+
+Decide whether pending TCP data should be pushed for transmission.
+
+### Responsibility
+
+1. Check the tail skb and determine whether the pending data should be pushed.
+2. Consider application hints such as MSG_MORE and TCP_NODELAY when deciding whether to push.
+3. Call __tcp_push_pending_frames() to continue the TCP transmission path.
+
+---
+
+## __tcp_push_pending_frames()
+
+### Role
+
+check connection state and push sk
+
+### Responsibility
+
+1. Check state connection is not closed
+2. Call tcp_write_xmit() to push date
+
+---
+
+## tcp_write_xmit()
+
+### Role
+
